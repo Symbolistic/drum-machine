@@ -119,7 +119,7 @@ class DrumApp extends React.Component {
             <div id='DrumAppContainer'>
                 <div id="side1">
                     {this.state.keys.map(({key, src, ref, style}) => (
-                        <button key={key} className="drum-pad" onClick={() => this.handleClick(key)} onKeyPress={this.handleKey} >{key}
+                        <button key={key} id={key+"pad"} className="drum-pad" onClick={() => this.handleClick(key)} onKeyPress={this.handleKey} >{key}
                             <audio id={key} className="clip" src={src} ref={ref}></audio>
                         </button>
                     ))}
