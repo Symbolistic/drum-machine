@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
 }
 
 #drum-machine {
@@ -69,4 +70,8 @@ footer {
     background-color: blueviolet;
     color:white;
     text-align: center;
+}
+
+button:active{
+    background-color: hotpink;
 }
