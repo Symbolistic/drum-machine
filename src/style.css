@@ -16,6 +16,7 @@ header {
     background-color: black;
     color: white;
     text-align: center;
+    padding:10px;
 }
 
 main {
@@ -52,26 +53,30 @@ main {
     display:grid;
     align-content: center;
     justify-content: center;
+    font-size: 24px;
+}
+
+.drum-pad:focus {
+    background-color: orange;
 }
 
 #side2 {
     background-color: brown;
     display: grid;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center
 }
 
 #display {
     background-color: greenyellow;
     border: 1px solid black;
+    width: 300px;
+    text-align: center;
 }
 
 footer {
     background-color: blueviolet;
     color:white;
     text-align: center;
-}
-
-button:active{
-    background-color: hotpink;
+    padding: 10px;
 }

@@ -70,47 +70,56 @@ class DrumApp extends React.Component {
         super()
         this.state = {
             keys,
-            display: '',
-            color: "blue"
+            display: 'Start Playing!',
+            isToggled: false
         };
-        this.mainInput = React.createRef();
         this.handleClick = this.handleClick.bind(this);
         this.handleKey = this.handleKey.bind(this);
     }
 
     handleClick (key) {
-        console.log(key)
         const audio = this.state.keys.find(x => x.key === key);
 
         audio.ref.current.currentTime = 0;
         audio.ref.current.play();
-
         this.setState({display: audio.display})
+        
+        setTimeout(function() {
+            audio.ref.current.parentElement.blur();
+        }, 100);
     }
 
     handleKey (event) {
-        console.log(event.target)
-
         const audio = this.state.keys.find(x => x.key === event.key.toUpperCase());
+        console.log(audio.ref.current.parentElement)
+        
         if(audio){
             audio.ref.current.currentTime = 0;
             audio.ref.current.play();
+            this.setState({display: audio.display})
+            audio.ref.current.parentElement.focus();
 
-            this.setState({display:audio.display})
+            setTimeout(function() {
+                audio.ref.current.parentElement.blur();
+            }, 100);
         }
     }
 
     componentDidMount () {
-        this.mainInput.current.focus();
+        document.addEventListener("keypress", this.handleKey)
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keypress", this.handleKey)
     }
 
 
     render() {
         return (
-            <div id='DrumAppContainer' tabIndex='0' onKeyPress={this.handleKey} ref={this.mainInput}>
+            <div id='DrumAppContainer'>
                 <div id="side1">
-                    {this.state.keys.map(({key, src, ref}) => (
-                        <button key={key} className="drum-pad" onClick={() => this.handleClick(key)} style={{"color":this.state.color}}>{key}
+                    {this.state.keys.map(({key, src, ref, style}) => (
+                        <button key={key} className="drum-pad" onClick={() => this.handleClick(key)} onKeyPress={this.handleKey} >{key}
                             <audio id={key} className="clip" src={src} ref={ref}></audio>
                         </button>
                     ))}
